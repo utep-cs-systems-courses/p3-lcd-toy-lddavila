@@ -1,5 +1,5 @@
 # makfile configuration
-COMMON_OBJECTS	= switches.o p2_c_handler.o p2_asm_handler.o led.o
+COMMON_OBJECTS	= switches.o p2_c_handler.o p2_asm_handler.o led.o draw_shapes.o wdtInterruptHandler.o
 CPU             = msp430g2553	
 CFLAGS          = -mmcu=${CPU} -Os -I../h
 LDFLAGS		= -L../lib -L/opt/ti/msp430_gcc/include/ 
@@ -11,7 +11,7 @@ AS              = msp430-elf-gcc -mmcu=${CPU} -c
 all: button_demo.elf
 
 #additional rules for files
-button_demo.elf: ${COMMON_OBJECTS} button_demo.o
+button_demo.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
 load: button_demo.elf
