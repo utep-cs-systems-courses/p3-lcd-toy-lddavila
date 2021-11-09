@@ -5,7 +5,7 @@
 #include "draw_shapes.h"
 
 // WARNING: LCD DISPLAY USES P1.0.  Do not touch!!! 
-
+/*
 void main()
 {
   configureClocks();
@@ -16,5 +16,6 @@ void main()
 
   enableWDTInterrupts();
 
-  or_sr(0x18);	/**< CPU off , GIE on*/
+  or_sr(0x18);	/**< CPU off , GIE on
 }
+*/
