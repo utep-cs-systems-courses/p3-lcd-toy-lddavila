@@ -89,7 +89,15 @@ void main(void)
   topPlayer.height = 5;
   topPlayer.width =15;
   draw_rectangle(screenWidth/2, 10, topPlayer);
-
+  
+  rectangle bottomPlayer;
+  bottomPlayer.rect_row=0;
+  bottomPlayer.rect_col = screenWidth/2;
+  bottomPlayer.old_rect_row=0;
+  bottomPlayer.old_rect_col= screenWidth/2;
+  bottomPlayer.height = 5;
+  bottomPlayer.width =15;
+  draw_rectangle(screenWidth/2, screenHeight-15, bottomPlayer);
   
   //init_shapes();
   //enableWDTInterrupts();
