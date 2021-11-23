@@ -21,12 +21,39 @@ void
 init_shapes(void)
 {
   // vars for the rectangle
-  rect1.rect_row = 40;
-  rect1.rect_col = screenWidth / 2;
-  rect1.old_rect_row = 40;
-  rect1.old_rect_col = screenWidth / 2;
-  rect1.height = 10;
-  rect1.width  = 60;
+  rectangle borderLeft;
+  borderLeft.rect_row = 0;
+  borderLeft.rect_col = screenWidth/2;
+  borderLeft.old_rect_row = 0 ;
+  borderLeft.old_rect_col = screenWidth/2;
+  borderLeft.height = screenHeight;
+  borderLeft.width =10;
+  draw_rectangle(0,0,borderLeft);
+
+  rectangle borderRight;
+  borderRight.rect_row =0;
+  borderRight.rect_col=screenWidth/2;
+  borderRight.old_rect_row=0;
+  borderRight.old_rect_col = screenWidth/2;
+  borderRight.height = screenHeight;
+  borderRight.width = 10;
+  draw_rectangle(screenWidth-10,0,borderRight);
+  rectangle topPlayer;
+  topPlayer.rect_row=0;
+  topPlayer.rect_col = screenWidth/2;
+  topPlayer.old_rect_row=0;
+  topPlayer.old_rect_col= screenWidth/2;
+  topPlayer.height = 5;
+  topPlayer.width =15;
+  draw_rectangle(screenWidth/2, 10, topPlayer);
+  rectangle bottomPlayer;
+  bottomPlayer.rect_row=0;
+  bottomPlayer.rect_col = screenWidth/2;
+  bottomPlayer.old_rect_row=0;
+  bottomPlayer.old_rect_col= screenWidth/2;
+  bottomPlayer.height = 5;
+  bottomPlayer.width =15;
+  draw_rectangle(screenWidth/2, screenHeight-15, bottomPlayer);
 
   // vars for the circle
   /*
