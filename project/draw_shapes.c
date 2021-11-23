@@ -15,7 +15,7 @@ rectangle rect1;
 /* int r; */
 circle cir1;
 
-u_int background_color = COLOR_RED;
+u_int background_color = COLOR_BLACK;
 
 void
 init_shapes(void)
@@ -56,37 +56,39 @@ init_shapes(void)
   draw_rectangle(screenWidth/2, screenHeight-15, bottomPlayer);
 
   // vars for the circle
-  /*
+  
   cir1.cir_y = 60;
   cir1.cir_x = screenWidth / 2;
   cir1.old_cir_y = 60;
   cir1.old_cir_x = screenWidth / 2;
-  cir1.r = 20;
-  */
+  cir1.r =4 ;
+  // draw_circle(screenWidth/2, screenHeight/2, cir1.r, WHITE);
+
+  
 }
 
 void
-draw_moving_shapes(void)
+draw_moving_shapes()
 {
-  /*
+  
   int left_col = rect1.old_rect_col - (rect1.width / 2);
   int top_row  = rect1.old_rect_row - (rect1.height / 2);
 
   // blank out the old rectangle
-  fillRectangle(left_col, top_row, rect1.width, rect1.height, background_color);
+  //fillRectangle(left_col, top_row, rect1.width, rect1.height, background_color);
 
   // blank out the old circle
   draw_circle(cir1.old_cir_x, cir1.old_cir_y, cir1.r, background_color);
 
   // draw and update the rectangle
-  moving_rectangle(&rect1);
+  //moving_rectangle(&rect1);
   
   // draw and update the circle
-  moving_circle();
+  moving_circle(cir1);
 
   // draw the triangle
-  draw_triangle();
-  */
+  // draw_triangle();
+  
 }
 
 
@@ -220,7 +222,7 @@ draw_circle(int x, int y, int r, u_int color)
 }
 
 void
-moving_circle(void)
+moving_circle()
 {
   static int x_vel = 5;
   static int y_vel = 10;
@@ -232,7 +234,7 @@ moving_circle(void)
   draw_circle(cir1.cir_x, cir1.cir_y, cir1.r, color);
 
   // save current position
-  cir1.old_cir_x = cir1.cir_x;
+  cir1.old_cir_x =cir1.cir_x;
   cir1.old_cir_y = cir1.cir_y;
 
   // update position
@@ -240,7 +242,7 @@ moving_circle(void)
   cir1.cir_y += y_vel;
   
   // check boundaries, see if rectangle has hit the edges
-  if ( (cir1.cir_x + cir1.r) >= screenWidth || (cir1.cir_x - cir1.r) <= 0) {
+  if ( (cir1.cir_x + cir1.r) >= screenWidth-10|| (cir1.cir_x - cir1.r) <= 10) {
     // top or bottom hit, reverse x velocity
     x_vel = x_vel * -1;
   }

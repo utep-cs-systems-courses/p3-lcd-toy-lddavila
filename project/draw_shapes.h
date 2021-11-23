@@ -26,7 +26,7 @@ extern u_int background_color;
 void init_shapes(void);
 
 /* handles erasing and updating all the shapes */
-void draw_moving_shapes(void);
+void draw_moving_shapes();
 
 /* handles a single rectangle, updates its 
    position and draws it at its new location */
@@ -34,7 +34,7 @@ void moving_rectangle(rectangle* to_draw);
 
 /* handles a single circle, updates its 
    position and draws it at its new location */
-void moving_circle(void);
+void moving_circle();
 
 /* draws a rectangle */
 void draw_rectangle(int,int,rectangle);
