@@ -4,12 +4,12 @@
 #include "lcddraw.h"
 #include "switches.h"
 #include "led.h"
-
+#include "draw_shapes.h"
 // WARNING: LCD DISPLAY USES P1.0.  Do not touch!!! 
 
 
 char redraw_screen = 1;
-u_int backgroundColor = COLOR_BLUE;
+u_int backgroundColor = COLOR_BLACK;
  
 void
 update_text(void)
@@ -50,30 +50,66 @@ update_text(void)
 void main(void)
 {
   
-  configureClocks();
+   configureClocks();
   led_init();
   switch_p2_init();
   lcd_init();
   
-  //enableWDTInterrupts();      /**< enable periodic interrupt */
+  enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
   
   clearScreen(backgroundColor);
+  
+  
+  
 
-  while (1) {			/* forever */
-    if (redraw_screen) {
-      redraw_screen = 0;
-      update_text();
-    }
-    green_on = 0;   	/* led off */
-    led_changed = 1;
-    led_update();
-    or_sr(0x10);	/**< CPU OFF */
+  rectangle borderLeft;
+  borderLeft.rect_row = 0;
+  borderLeft.rect_col = screenWidth/2;
+  borderLeft.old_rect_row = 0 ;
+  borderLeft.old_rect_col = screenWidth/2;
+  borderLeft.height = screenHeight;
+  borderLeft.width =10;
+  draw_rectangle(0,0,borderLeft);
+
+  rectangle borderRight;
+  borderRight.rect_row =0;
+  borderRight.rect_col=screenWidth/2;
+  borderRight.old_rect_row=0;
+  borderRight.old_rect_col = screenWidth/2;
+  borderRight.height = screenHeight;
+  borderRight.width = 10;
+  draw_rectangle(screenWidth-10,0,borderRight);
+
+  rectangle topPlayer;
+  topPlayer.rect_row=0;
+  topPlayer.rect_col = screenWidth/2;
+  topPlayer.old_rect_row=0;
+  topPlayer.old_rect_col= screenWidth/2;
+  topPlayer.height = 5;
+  topPlayer.width =15;
+  draw_rectangle(screenWidth/2, 10, topPlayer);
+
+  
+  //init_shapes();
+  //enableWDTInterrupts();
+  //or_sr(0x18);/**< CPU off , GIE on/*/
+
+  
+  //while (1) {			/* forever */
+  //if (redraw_screen) {
+  //  redraw_screen = 0;
+  //  update_text();
+  //}
+  //green_on = 0;   	/* led off */
+  //led_changed = 1;
+  //led_update();
+  //or_sr(0x10);	/**< CPU OFF */
     
-    green_on = 1;	/* led on */
-    led_changed = 1;
-    led_update();
-  }
+  //green_on = 1;	/* led on */
+  //led_changed = 1;
+  //led_update();
+  //}
 }
 
     

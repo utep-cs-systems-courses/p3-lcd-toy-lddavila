@@ -15,7 +15,7 @@ rectangle rect1;
 /* int r; */
 circle cir1;
 
-u_int background_color = COLOR_BLUE;
+u_int background_color = COLOR_RED;
 
 void
 init_shapes(void)
@@ -29,16 +29,19 @@ init_shapes(void)
   rect1.width  = 60;
 
   // vars for the circle
+  /*
   cir1.cir_y = 60;
   cir1.cir_x = screenWidth / 2;
   cir1.old_cir_y = 60;
   cir1.old_cir_x = screenWidth / 2;
   cir1.r = 20;
+  */
 }
 
 void
 draw_moving_shapes(void)
 {
+  /*
   int left_col = rect1.old_rect_col - (rect1.width / 2);
   int top_row  = rect1.old_rect_row - (rect1.height / 2);
 
@@ -56,18 +59,19 @@ draw_moving_shapes(void)
 
   // draw the triangle
   draw_triangle();
+  */
 }
 
-void
-draw_rectangle(void)
+
+void draw_rectangle(int xCoordinate, int yCoordinate,rectangle local)
 {
-  int left_col = rect1.rect_col - (rect1.width / 2);
-  int top_row  = rect1.rect_row - (rect1.height / 2);
+  int left_col = local.rect_col - (local.width / 3);
+  int top_row  = local.rect_row - (local.height / 2);
 
   unsigned int blue = 16, green = 0, red = 31;
-  unsigned int color = (blue << 11) | (green << 5) | red;
+  unsigned int color = (blue << 11)| (green << 5) | red;
 
-  fillRectangle(left_col, top_row, rect1.width, rect1.height, color);
+  fillRectangle(xCoordinate, yCoordinate, local.width, local.height, color);
 }
 
 

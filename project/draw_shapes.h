@@ -37,7 +37,7 @@ void moving_rectangle(rectangle* to_draw);
 void moving_circle(void);
 
 /* draws a rectangle */
-void draw_rectangle(void);
+void draw_rectangle(int,int,rectangle);
 
 /* draws a triangle */
 void draw_triangle(void);
