@@ -43,16 +43,16 @@ init_shapes(void)
   
   topPlayer.rect_row=13;
   topPlayer.rect_col = 72;
-  topPlayer.old_rect_row=0;
-  topPlayer.old_rect_col= screenWidth/2;
+  topPlayer.old_rect_row=13;
+  topPlayer.old_rect_col= 72;
   topPlayer.height = 6;
   topPlayer.width =16;
   draw_rectangle(64, 10, topPlayer);
   
   bottomPlayer.rect_row=153;
   bottomPlayer.rect_col = 72;
-  bottomPlayer.old_rect_row=0;
-  bottomPlayer.old_rect_col= screenWidth/2;
+  bottomPlayer.old_rect_row=153;
+  bottomPlayer.old_rect_col= 72;
   bottomPlayer.height = 6;
   bottomPlayer.width =16;
   draw_rectangle(64, 150, bottomPlayer);
@@ -72,13 +72,17 @@ init_shapes(void)
 void
 draw_moving_shapes()
 {
+  int left_col1 = topPlayer.old_rect_col - (topPlayer.width / 2);
+  int top_row1  = topPlayer.old_rect_row - (topPlayer.height / 2);
+
+  // blank out the old top player
+  fillRectangle(left_col1, top_row1, topPlayer.width, topPlayer.height, background_color);
+
+  int left_col2 = bottomPlayer.old_rect_col - (bottomPlayer.width/2);
+  int top_row2 = bottomPlayer.old_rect_row - (bottomPlayer.height/2);
+
+  fillRectangle(left_col2, top_row2, bottomPlayer.width, bottomPlayer.width, background_color);
   
-  int left_col = topPlayer.old_rect_col - (topPlayer.width / 2);
-  int top_row  = topPlayer.old_rect_row - (topPlayer.height / 2);
-
-  // blank out the old rectangle
-  fillRectangle(left_col, top_row, topPlayer.width, topPlayer.height, background_color);
-
   // blank out the old circle
   draw_circle(cir1.old_cir_x, cir1.old_cir_y, cir1.r, background_color);
 
@@ -86,11 +90,7 @@ draw_moving_shapes()
   moving_rectangle();
   
   // draw and update the circle
-  moving_circle(cir1);
-
-  // draw the triangle
-  // draw_triangle();
-  
+  moving_circle(cir1);  
 }
 
 
@@ -113,8 +113,8 @@ moving_rectangle()
   rectangle *to_draw2 = &bottomPlayer;
 
   
-  static int x_vel = 10;
-  static int y_vel = 5;
+  static int x_vel1 = 10;
+  static int y_vel1 = 5;
 
   int left_col = to_draw1->rect_col - (to_draw1->width / 2);
   int top_row  = to_draw1->rect_row - (to_draw1->height / 2);
@@ -131,21 +131,31 @@ moving_rectangle()
 
   // update position
   // to_draw->rect_row += y_vel;
-  to_draw1->rect_col += x_vel;
+  to_draw1->rect_col += x_vel1;
 
   // check boundaries, see if rectangle has hit the edges
   if ( ( to_draw1->rect_col - (to_draw1->width / 2) ) <= 14 ||            // left boundary
        ( to_draw1->rect_col + (to_draw1->width / 2) ) >= screenWidth-19 ) { // right boundary
     // right or left hit, reverse x velocity
-    x_vel = x_vel * -1;
+    x_vel1 = x_vel1 * -1;
   }
-  /*
-  if ( (to_draw->rect_row + to_draw->height / 2) >= screenHeight ||   // bottom
-       (to_draw->rect_row - to_draw->height / 2) <= 0) {              // top
-    // top or bottom hit, reverse y velocity
-    y_vel = y_vel * -1;
+
+  static int x_vel2 =10;
+
+  int left_col2 = to_draw2->rect_col-(to_draw2->width/2);
+  int top_row2 = to_draw2->rect_row-(to_draw2->height/2);
+  fillRectangle(left_col2,top_row2,to_draw2->width,to_draw2->width,color);
+
+  to_draw2->old_rect_row = to_draw2->rect_row;
+  to_draw2->old_rect_col= to_draw2->rect_col;
+  to_draw2->rect_col+= x_vel2;
+  
+  if((to_draw2->rect_col-(to_draw2->width/2) ) <=14 ||
+     (to_draw2->rect_col+(to_draw2->width/2) ) >= screenWidth-19) {
+    x_vel2 = x_vel2 *-1;
   }
-  */
+  
+  
 
 }
 
