@@ -30,7 +30,7 @@ void draw_moving_shapes();
 
 /* handles a single rectangle, updates its 
    position and draws it at its new location */
-void moving_rectangle(rectangle* to_draw);
+void moving_rectangle();
 
 /* handles a single circle, updates its 
    position and draws it at its new location */

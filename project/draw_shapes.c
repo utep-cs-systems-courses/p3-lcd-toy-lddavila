@@ -73,17 +73,17 @@ void
 draw_moving_shapes()
 {
   
-  int left_col = rect1.old_rect_col - (rect1.width / 2);
-  int top_row  = rect1.old_rect_row - (rect1.height / 2);
+  int left_col = topPlayer.old_rect_col - (topPlayer.width / 2);
+  int top_row  = topPlayer.old_rect_row - (topPlayer.height / 2);
 
   // blank out the old rectangle
-  //fillRectangle(left_col, top_row, rect1.width, rect1.height, background_color);
+  fillRectangle(left_col, top_row, topPlayer.width, topPlayer.height, background_color);
 
   // blank out the old circle
   draw_circle(cir1.old_cir_x, cir1.old_cir_y, cir1.r, background_color);
 
   // draw and update the rectangle
-  //moving_rectangle(&rect1);
+  moving_rectangle();
   
   // draw and update the circle
   moving_circle(cir1);
@@ -107,39 +107,45 @@ void draw_rectangle(int xCoordinate, int yCoordinate,rectangle local)
 
 
 void
-moving_rectangle(rectangle *to_draw)
+moving_rectangle()
 {
+  rectangle *to_draw1 = &topPlayer;
+  rectangle *to_draw2 = &bottomPlayer;
+
+  
   static int x_vel = 10;
   static int y_vel = 5;
 
-  int left_col = to_draw->rect_col - (to_draw->width / 2);
-  int top_row  = to_draw->rect_row - (to_draw->height / 2);
+  int left_col = to_draw1->rect_col - (to_draw1->width / 2);
+  int top_row  = to_draw1->rect_row - (to_draw1->height / 2);
 
   unsigned int blue = 16, green = 0, red = 31;
   unsigned int color = (blue << 11) | (green << 5) | red;
 
   // draw rectangle at current position
-  fillRectangle(left_col, top_row, to_draw->width, to_draw->height, color);
+  fillRectangle(left_col, top_row, to_draw1->width, to_draw1->height, color);
 
   // save current position
-  to_draw->old_rect_row = to_draw->rect_row;
-  to_draw->old_rect_col = to_draw->rect_col;
+  to_draw1->old_rect_row = to_draw1->rect_row;
+  to_draw1->old_rect_col = to_draw1->rect_col;
 
   // update position
-  to_draw->rect_row += y_vel;
-  to_draw->rect_col += x_vel;
+  // to_draw->rect_row += y_vel;
+  to_draw1->rect_col += x_vel;
 
   // check boundaries, see if rectangle has hit the edges
-  if ( ( to_draw->rect_col - (to_draw->width / 2) ) <= 0 ||            // left boundary
-       ( to_draw->rect_col + (to_draw->width / 2) ) >= screenWidth ) { // right boundary
+  if ( ( to_draw1->rect_col - (to_draw1->width / 2) ) <= 14 ||            // left boundary
+       ( to_draw1->rect_col + (to_draw1->width / 2) ) >= screenWidth-19 ) { // right boundary
     // right or left hit, reverse x velocity
     x_vel = x_vel * -1;
   }
+  /*
   if ( (to_draw->rect_row + to_draw->height / 2) >= screenHeight ||   // bottom
        (to_draw->rect_row - to_draw->height / 2) <= 0) {              // top
     // top or bottom hit, reverse y velocity
     y_vel = y_vel * -1;
   }
+  */
 
 }
 
@@ -262,7 +268,9 @@ moving_circle()
     y_vel = y_vel * -1;
   }
 
-  if(cir1.cir_y+cir1.r > 150){
+  if((cir1.cir_y+cir1.r > 144) &&
+     (bottomPlayer.rect_col- bottomPlayer.width/2<= cir1.cir_x + cir1.r) &&
+     (cir1.cir_x + cir1.r <=bottomPlayer.rect_col+bottomPlayer.width/2)){
     y_vel = y_vel *-1;
   }
   

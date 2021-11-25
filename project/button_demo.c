@@ -62,14 +62,23 @@ void main(void)
   
   init_shapes();
 
-  rectangle test;
-  test.rect_row = 0;
-  test.rect_col = screenWidth/2;
-  test.old_rect_row = 100 ;
-  test.old_rect_col = screenWidth/2;
-  test.height = 10;
-  test.width =10;
-  draw_rectangle(screenWidth/2,screenHeight/2,test);
+  if (switch1_state == down) {
+    
+  }
+  
+  if (switch2_state == down) {
+    
+  }
+  
+  if(switch3_state == down){
+
+  }
+ 
+  if(switch4_state == down){
+    
+  }
+  
+  
 
   
   //enableWDTInterrupts();

@@ -11,6 +11,8 @@ __interrupt_vec(WDT_VECTOR) WDT()
   const  u_int second_limit = 250;
   static u_int second_count = 0;
 
+  
+
   second_count++;
 
   if (second_count >= second_limit) {
