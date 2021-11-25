@@ -14,6 +14,8 @@ rectangle rect1;
 /* int old_cir_y, old_cir_x; */
 /* int r; */
 circle cir1;
+rectangle topPlayer;
+rectangle bottomPlayer;
 
 u_int background_color = COLOR_BLACK;
 
@@ -38,22 +40,22 @@ init_shapes(void)
   borderRight.height = screenHeight;
   borderRight.width = 10;
   draw_rectangle(screenWidth-10,0,borderRight);
-  rectangle topPlayer;
-  topPlayer.rect_row=0;
-  topPlayer.rect_col = screenWidth/2;
+  
+  topPlayer.rect_row=13;
+  topPlayer.rect_col = 72;
   topPlayer.old_rect_row=0;
   topPlayer.old_rect_col= screenWidth/2;
-  topPlayer.height = 5;
-  topPlayer.width =15;
-  draw_rectangle(screenWidth/2, 10, topPlayer);
-  rectangle bottomPlayer;
-  bottomPlayer.rect_row=0;
-  bottomPlayer.rect_col = screenWidth/2;
+  topPlayer.height = 6;
+  topPlayer.width =16;
+  draw_rectangle(64, 10, topPlayer);
+  
+  bottomPlayer.rect_row=153;
+  bottomPlayer.rect_col = 72;
   bottomPlayer.old_rect_row=0;
   bottomPlayer.old_rect_col= screenWidth/2;
-  bottomPlayer.height = 5;
-  bottomPlayer.width =15;
-  draw_rectangle(screenWidth/2, screenHeight-15, bottomPlayer);
+  bottomPlayer.height = 6;
+  bottomPlayer.width =16;
+  draw_rectangle(64, 150, bottomPlayer);
 
   // vars for the circle
   
@@ -241,7 +243,7 @@ moving_circle()
   cir1.cir_x += x_vel;
   cir1.cir_y += y_vel;
   
-  // check boundaries, see if rectangle has hit the edges
+  // check boundaries, see if circle has hit the border
   if ( (cir1.cir_x + cir1.r) >= screenWidth-10|| (cir1.cir_x - cir1.r) <= 10) {
     // top or bottom hit, reverse x velocity
     x_vel = x_vel * -1;
@@ -251,4 +253,17 @@ moving_circle()
     // right or left hit, reverse y velocity
     y_vel = y_vel * -1;
   }
+
+  
+  if (((cir1.cir_y - topPlayer.rect_row) == cir1.r + topPlayer.height/2) &&
+      (topPlayer.rect_col- topPlayer.width/2<= cir1.cir_x + cir1.r) &&
+      (cir1.cir_x + cir1.r <=topPlayer.rect_col+topPlayer.width/2)) { 
+    // right or left hit, reverse y velocity
+    y_vel = y_vel * -1;
+  }
+
+  if(cir1.cir_y+cir1.r > 150){
+    y_vel = y_vel *-1;
+  }
+  
 }

@@ -50,7 +50,7 @@ update_text(void)
 void main(void)
 {
   
-   configureClocks();
+  configureClocks();
   led_init();
   switch_p2_init();
   lcd_init();
@@ -61,6 +61,17 @@ void main(void)
   clearScreen(backgroundColor);
   
   init_shapes();
+
+  rectangle test;
+  test.rect_row = 0;
+  test.rect_col = screenWidth/2;
+  test.old_rect_row = 100 ;
+  test.old_rect_col = screenWidth/2;
+  test.height = 10;
+  test.width =10;
+  draw_rectangle(screenWidth/2,screenHeight/2,test);
+
+  
   //enableWDTInterrupts();
   //or_sr(0x18);/**< CPU off , GIE on/*/
 
