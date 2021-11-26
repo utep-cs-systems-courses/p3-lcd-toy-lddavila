@@ -5,6 +5,7 @@
 #include "switches.h"
 #include "led.h"
 #include "draw_shapes.h"
+#include "buzzer.h"
 // WARNING: LCD DISPLAY USES P1.0.  Do not touch!!! 
 
 
@@ -23,24 +24,28 @@ update_text(void)
   
   if (switch1_state == down) {
     drawChar5x7(text_col, text_row, '1',on_color, backgroundColor);
+    change_direction(1);
   } else {
-    drawChar5x7(text_col, text_row, '-',off_color, backgroundColor);
+    drawChar5x7(text_col, text_row, ' ',off_color, backgroundColor);
   }
   if (switch2_state == down) {
     drawChar5x7(text_col + char_width, text_row, '2',on_color, backgroundColor);
+    change_direction(2);
   } else {
-    drawChar5x7(text_col + char_width, text_row, '-',off_color, backgroundColor);
+    drawChar5x7(text_col + char_width, text_row, ' ',off_color, backgroundColor);
   }
   if(switch3_state == down){
     drawChar5x7(text_col+ char_width*2, text_row, '3',on_color,backgroundColor);
+    change_direction(3);
   }
   else{
-    drawChar5x7(text_col + char_width*2, text_row, '-',off_color, backgroundColor);
+    drawChar5x7(text_col + char_width*2, text_row, ' ',off_color, backgroundColor);
   }
   if(switch4_state == down){
     drawChar5x7(text_col+char_width*3, text_row, '4',on_color, backgroundColor);
+    change_direction(4);
   }
-  else{drawChar5x7(text_col+char_width*3, text_row, '-',off_color, backgroundColor);
+  else{drawChar5x7(text_col+char_width*3, text_row, ' ',off_color, backgroundColor);
   }
 
 }
@@ -57,35 +62,17 @@ void main(void)
   
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
-  
   clearScreen(backgroundColor);
-  
   init_shapes();
-
-  if (switch1_state == down) {
-    
-  }
-  
-  if (switch2_state == down) {
-    
-  }
-  
-  if(switch3_state == down){
-
-  }
- 
-  if(switch4_state == down){
-    
-  }
-  
-  
-
   
   //enableWDTInterrupts();
   //or_sr(0x18);/**< CPU off , GIE on/*/
+  // buzzer_init();
 
+  // buzzer_set_period(500);//START BUZZING
   
-  //while (1) {			/* forever */
+  while (1) {			/* forever */
+    update_text();
   //if (redraw_screen) {
   //  redraw_screen = 0;
   //  update_text();
@@ -98,7 +85,7 @@ void main(void)
   //green_on = 1;	/* led on */
   //led_changed = 1;
   //led_update();
-  //}
+  }
 }
 
     

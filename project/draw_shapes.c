@@ -2,6 +2,10 @@
 #include "lcdutils.h"
 #include "lcddraw.h"
 #include "draw_shapes.h"
+#include <libTimer.h>
+#include "switches.h"
+#include "led.h"
+
 
 // global vars for the rectangle
 rectangle rect1;
@@ -18,6 +22,9 @@ rectangle topPlayer;
 rectangle bottomPlayer;
 
 u_int background_color = COLOR_BLACK;
+
+static int x_vel1 = 10;
+static int x_vel2 = 10;
 
 void
 init_shapes(void)
@@ -68,7 +75,25 @@ init_shapes(void)
 
   
 }
+void
+change_direction(int button){
+  switch(button){
+  case 1:
+    x_vel1=-10;
+    break;
+  case 2:
+    x_vel1 = 10;
+    break;
+  case 3:
+    x_vel2= -10;
+    break;
+  case 4:
+    x_vel2 = 10;
+    break;
 
+  }
+
+}
 void
 draw_moving_shapes()
 {
@@ -113,7 +138,7 @@ moving_rectangle()
   rectangle *to_draw2 = &bottomPlayer;
 
   
-  static int x_vel1 = 10;
+  
   static int y_vel1 = 5;
 
   int left_col = to_draw1->rect_col - (to_draw1->width / 2);
@@ -140,7 +165,7 @@ moving_rectangle()
     x_vel1 = x_vel1 * -1;
   }
 
-  static int x_vel2 =10;
+  
 
   int left_col2 = to_draw2->rect_col-(to_draw2->width/2);
   int top_row2 = to_draw2->rect_row-(to_draw2->height/2);
@@ -154,7 +179,10 @@ moving_rectangle()
      (to_draw2->rect_col+(to_draw2->width/2) ) >= screenWidth-19) {
     x_vel2 = x_vel2 *-1;
   }
-  
+
+  if(switch1_state == down){
+    x_vel1 = x_vel1 *-1;
+    }
   
 
 }

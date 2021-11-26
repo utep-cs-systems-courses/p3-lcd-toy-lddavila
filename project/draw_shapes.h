@@ -25,6 +25,9 @@ extern u_int background_color;
 /* initializes shape positions */
 void init_shapes(void);
 
+//change directions of the shapes
+void change_direction(int);
+
 /* handles erasing and updating all the shapes */
 void draw_moving_shapes();
 

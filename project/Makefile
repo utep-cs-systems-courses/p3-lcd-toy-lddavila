@@ -11,7 +11,7 @@ AS              = msp430-elf-gcc -mmcu=${CPU} -c
 all: button_demo.elf
 
 #additional rules for files
-button_demo.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o
+button_demo.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o buzzer.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
 load: button_demo.elf
