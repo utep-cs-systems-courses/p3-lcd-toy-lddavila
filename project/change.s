@@ -4,8 +4,8 @@
 button:		 .word 0x00
 	
 jt:
-	.word #case_0
-	.word #case_1
+	.word case_0
+	.word case_1
 	
 	.global change
 	
@@ -14,6 +14,9 @@ change:
 	cmp &button, r12
 	jc end_case
 	mov &button, r12
+	add r12, r12
+	
+
 case_0:
 	mov #-10, r12
 	jmp end_case
