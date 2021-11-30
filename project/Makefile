@@ -23,4 +23,5 @@ load_c: button_demo_c.elf
 load_s: button_demo_s.elf
 	msp430loader.sh $^
 clean:
-	rm -f *.o *.elf
+	rm -f *.o *.elf *.c~ *.s~
+
