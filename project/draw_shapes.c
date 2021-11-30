@@ -79,10 +79,10 @@ void
 change_direction(int button){
   switch(button){
   case 1:
-    x_vel1=-10;
+    x_vel1 = change(0);
     break;
   case 2:
-    x_vel1 = 10;
+    x_vel1 = change(1);
     break;
   case 3:
     x_vel2= -10;

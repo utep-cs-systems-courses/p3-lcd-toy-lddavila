@@ -65,26 +65,11 @@ void main(void)
   clearScreen(backgroundColor);
   init_shapes();
   
-  //enableWDTInterrupts();
-  //or_sr(0x18);/**< CPU off , GIE on/*/
-  // buzzer_init();
-
-  // buzzer_set_period(500);//START BUZZING
+  
   
   while (1) {			/* forever */
     update_text();
-  //if (redraw_screen) {
-  //  redraw_screen = 0;
-  //  update_text();
-  //}
-  //green_on = 0;   	/* led off */
-  //led_changed = 1;
-  //led_update();
-  //or_sr(0x10);	/**< CPU OFF */
-    
-  //green_on = 1;	/* led on */
-  //led_changed = 1;
-  //led_update();
+  
   }
 }
 

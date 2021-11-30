@@ -1,0 +1,20 @@
+	.arch msp430
+	.p2align 1,0
+
+button:	 .word 0x00
+	
+jt:	 .word #case_0
+	 .word #case_1
+	.global change
+change:
+	mov #1, r12
+	cmp &state, r12
+	jc end
+	move &button, r12
+case_0:
+	
+	jmp end_case
+case_1:
+	jmp end_case
+end_case:
+	pop r0
