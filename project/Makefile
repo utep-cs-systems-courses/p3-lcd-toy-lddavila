@@ -14,7 +14,7 @@ all: button_demo.elf
 button_demo_c.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o buzzer.o change_direction.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd 
 
-button_demo_s.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o buzzer.o change_direction.o
+button_demo_s.elf: ${COMMON_OBJECTS} button_demo.o moving_demo.o buzzer.o change.o
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^ -lTimer -lLcd
 
 load_c: button_demo_c.elf
