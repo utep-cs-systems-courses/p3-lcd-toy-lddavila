@@ -11,13 +11,12 @@ jt:
 	
 change:
 	mov #1, r12
-	cmp &button, r12
+	cmp &button,r12
 	jc end_case
 	
 	mov &button, r12
 	add r12, r12
-	mov jt(r12), r0
-
+	mov(jt)r12, pc
 case_0:
 	mov #-10, r12
 	jmp end_case
